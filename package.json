@@ -1,7 +1,10 @@
 {
   "name": "alonso-web",
   "version": "1.0.0",
+  "devDependencies": {
+    "wrangler": "latest"
+  },
   "scripts": {
-    "build": "mkdir -p dist && cp index.html dist/"
+    "deploy": "wrangler pages deploy . --project-name=alonso-web"
   }
 }
