@@ -232,10 +232,8 @@
         <div class="admin-title">AÑADIR VEHÍCULO</div>
         <input type="text" id="carInputName" placeholder="MODELO (E.G. PORSCHE 911 GT3)">
         <input type="text" id="carInputPrice" placeholder="PRECIO (E.G. 215.000 €)">
-        <input type="text" id="carInputDetails"
-placeholder="KILOMETOS (E.G. 10.000km)">
-        <input type="text" id="carInputImg"        
-placeholder="URL DE LA IMAGEN (JPG/PNG)">
+        <input type="text" id="carInputDetails" placeholder="KILOMETOS (E.G. 10.000km)">
+        <input type="text" id="carInputImg" placeholder="URL DE LA IMAGEN (JPG/PNG)">
         <button class="btn-add" onclick="addCar()">PUBLICAR</button>
         <button class="btn-add" style="background: transparent; color: #666; border: 1px solid #333; margin-top: 10px;" onclick="clearInventory()">RESETEAR INVENTARIO</button>
     </div>
@@ -243,8 +241,8 @@ placeholder="URL DE LA IMAGEN (JPG/PNG)">
     <script>
         // Datos iniciales
         let cars = JSON.parse(localStorage.getItem('alonso_cars')) || [
-            { name: "TAYCAN TURBO S BLACK", price: "203,000 €", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80" },
-            { name: "911 GT3 RS", price: "265,000 €", img: "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=800&q=80" }
+            { name: "Mercedes Benz CLA AMG KIT", price: "32.000 €", img: "https://raw.githubusercontent.com/tommyalonso/alonsoweb/refs/heads/main/img/CLA%20AMG.jpg?token=GHSAT0AAAAAADUCEGNCPOHJUF35A4LTPDAI2LXPMJQ" },
+            { name: "PORSCHE 911 Turbo S", price: "265,000 €", img: "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=800&q=80" }
         ];
 
         const container = document.getElementById('carContainer');
