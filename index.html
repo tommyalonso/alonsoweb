@@ -305,18 +305,32 @@
             <p>
                 (inglés-español)<br>
                 Santa Cruz de Tenerife, ESPAÑA<br><br>
-                +34 625 59 88 47<br>
+                +34<br>
                 alonsopremiumcars@gmail.com
             </p>
         </div>
         
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Formulario enviado (simulado)');">
-            <input type="text" placeholder="NOMBRE COMPLETO" required>
-            <input type="email" placeholder="EMAIL" required>
-            <textarea placeholder="MENSAJE" rows="4" required></textarea>
+        <form class="contact-form" id="contactForm">
+            <input type="text" id="userName" placeholder="NOMBRE COMPLETO" required>
+            <input type="email" id="userEmail" placeholder="EMAIL" required>
+            <textarea id="userMessage" placeholder="MENSAJE" rows="4" required></textarea>
             <button type="submit" class="btn-submit">Enviar Solicitud</button>
         </form>
     </section>
+
+    <script>
+        // Formulario con mailto (abre el cliente de email del usuario)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const mensaje = document.getElementById('userMessage').value;
+            
+            const mailtoLink = `mailto:alonsopremiumcars@gmail.com?subject=Solicitud de ${nombre}&body=Nombre: ${nombre}%0D%0AEmail: ${email}%0D%0A%0D%0AMensaje:%0D%0A${encodeURIComponent(mensaje)}`;
+            
+            window.location.href = mailtoLink;
+        });
+    </script>
   
 
 
