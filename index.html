@@ -132,27 +132,9 @@
             font-size: clamp(0.85rem, 2vw, 1rem);
         }
 
-        /* Botón de eliminar coche */
+        /* Botón de eliminar coche - ya no se usa pero dejamos el CSS por si acaso */
         .delete-car-btn {
             display: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 0, 0, 0.8);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            font-size: 24px;
-            line-height: 35px;
-            text-align: center;
-            cursor: pointer;
-            z-index: 5;
-            font-weight: bold;
-        }
-
-        .admin-mode-on .delete-car-btn {
-            display: block;
         }
 
         /* SECCIÓN ABOUT */
@@ -238,82 +220,7 @@
             text-transform: uppercase;
         }
 
-        /* PANEL DE ADMINISTRACIÓN */
-        #adminPanel {
-            position: fixed;
-            top: 0; 
-            right: -100%;
-            width: 90%;
-            max-width: 400px;
-            height: 100%;
-            background: var(--black);
-            color: var(--white);
-            padding: 40px 30px;
-            transition: 0.5s;
-            z-index: 1000;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-            overflow-y: auto;
-        }
 
-        #adminPanel.active { 
-            right: 0; 
-        }
-
-        .admin-title {
-            font-family: var(--porsche-font);
-            font-size: clamp(0.6rem, 2vw, 0.7rem);
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-            color: #888;
-            text-transform: uppercase;
-        }
-
-        #adminPanel input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #333;
-            color: white;
-            padding: 15px 0;
-            margin-bottom: 20px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-        }
-
-        #adminPanel input:focus { 
-            border-bottom-color: var(--white); 
-        }
-
-        .btn-add {
-            width: 100%;
-            padding: 15px;
-            background: var(--white);
-            color: var(--black);
-            border: none;
-            font-family: var(--porsche-font);
-            font-size: clamp(0.6rem, 2vw, 0.7rem);
-            letter-spacing: 2px;
-            cursor: pointer;
-            margin-top: 20px;
-            text-transform: uppercase;
-        }
-
-        /* BOTÓN TOGGLE ADMIN */
-        .admin-toggle {
-            position: fixed;
-            bottom: 20px; 
-            right: 20px;
-            background: var(--black);
-            color: var(--white);
-            padding: 12px 20px;
-            font-family: var(--porsche-font);
-            font-size: clamp(0.5rem, 1.5vw, 0.6rem);
-            letter-spacing: 2px;
-            cursor: pointer;
-            z-index: 1100;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            text-transform: uppercase;
-        }
 
         /* MEDIA QUERIES ESPECÍFICAS */
         @media (max-width: 768px) {
@@ -345,18 +252,6 @@
             .about-section,
             .contact-section {
                 padding: 3rem 4%;
-            }
-
-            #adminPanel {
-                width: 100%;
-                max-width: 100%;
-                padding: 30px 20px;
-            }
-
-            .admin-toggle {
-                bottom: 15px;
-                right: 15px;
-                padding: 10px 15px;
             }
         }
 
@@ -423,23 +318,27 @@
         </form>
     </section>
   
-    <div class="admin-toggle" onclick="toggleAdmin()">+ NEW Vehicle</div>
 
-    <div id="adminPanel">
-        <div class="admin-title">Añadir Vehículo</div>
-        <input type="text" id="carInputName" placeholder="MODELO (E.G. PORSCHE 911 GT3)">
-        <input type="text" id="carInputPrice" placeholder="PRECIO (E.G. 215.000 €)">
-        <input type="text" id="carInputDetails" placeholder="KILÓMETROS (E.G. 10.000km)">
-        <input type="text" id="carInputImg" placeholder="URL DE LA IMAGEN (JPG/PNG)">
-        <button class="btn-add" onclick="addCar()">PUBLICAR</button>
-        <button class="btn-add" style="background: transparent; color: #666; border: 1px solid #333; margin-top: 10px;" onclick="clearInventory()">RESETEAR INVENTARIO</button>
-    </div>
 
     <script>
-        // Datos iniciales
-        let cars = JSON.parse(localStorage.getItem('alonso_cars')) || [
-            { name: "Mercedes Benz CLA AMG KIT", price: "32.000 €", details: "34.000 KM", img: "https://github.com/tommyalonso/alonsoweb/blob/main/img/CLA%20AMG.jpg?raw=true" },
-            { name: "PORSCHE 911 Turbo S", price: "265,000 €", details: "14.600 KM", img: "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=800&q=80" }
+        // INVENTARIO DE VEHÍCULOS
+        // Para añadir un nuevo vehículo, simplemente agrega un objeto con este formato:
+        // { name: "MODELO DEL COCHE", price: "PRECIO", details: "KILÓMETROS", img: "URL_DE_LA_IMAGEN" }
+        
+        let cars = [
+            { 
+                name: "Mercedes Benz CLA AMG KIT", 
+                price: "32.000 €", 
+                details: "34.000 KM", 
+                img: "https://github.com/tommyalonso/alonsoweb/blob/main/img/CLA%20AMG.jpg?raw=true" 
+            },
+            { 
+                name: "PORSCHE 911 Turbo S", 
+                price: "265.000 €", 
+                details: "14.600 KM", 
+                img: "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=800&q=80" 
+            }
+            // Añade más vehículos aquí siguiendo el mismo formato
         ];
 
         const container = document.getElementById('carContainer');
@@ -449,7 +348,6 @@
             cars.forEach((car, index) => {
                 container.innerHTML += `
                     <div class="car-card">
-                        <div class="delete-car-btn" onclick="deleteCar(${index})">×</div>
                         <img src="${car.img}" class="car-image" alt="${car.name}">
                         <div class="car-info">
                             <div class="car-name">${car.name}</div>
@@ -461,48 +359,7 @@
             });
         }
 
-        function deleteCar(index) {
-            const confirmacion = confirm(`¿Estás seguro de que quieres eliminar el ${cars[index].name}?`);
-            if (confirmacion) {
-                cars.splice(index, 1);
-                localStorage.setItem('alonso_cars', JSON.stringify(cars));
-                renderCars();
-            }
-        }
-
-        function toggleAdmin() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.toggle('active');
-            document.body.classList.toggle('admin-mode-on');
-        }
-
-        function addCar() {
-            const name = document.getElementById('carInputName').value;
-            const price = document.getElementById('carInputPrice').value;
-            const details = document.getElementById('carInputDetails').value;
-            const img = document.getElementById('carInputImg').value;
-
-            if(name && price && img) {
-                cars.push({ name, price, details, img });
-                localStorage.setItem('alonso_cars', JSON.stringify(cars));
-                renderCars();
-                document.getElementById('carInputName').value = '';
-                document.getElementById('carInputPrice').value = '';
-                document.getElementById('carInputDetails').value = '';
-                document.getElementById('carInputImg').value = '';
-            } else {
-                alert("Rellena todos los campos obligatorios (nombre, precio e imagen).");
-            }
-        }
-
-        function clearInventory() {
-            if(confirm("¿Seguro que quieres borrar TODO el inventario?")) {
-                localStorage.removeItem('alonso_cars');
-                cars = [];
-                renderCars();
-            }
-        }
-
+        // Renderizar los coches al cargar la página
         renderCars();
     </script>
 </body>
