@@ -13,12 +13,16 @@
             --porsche-font: 'Syncopate', sans-serif;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: var(--white);
             color: var(--black);
-            overflow-x: hidden; /* Evita scroll horizontal */
+            overflow-x: hidden;
         }
 
         /* NAVEGACIÓN */
@@ -27,7 +31,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 5%;
-            background: var(--white); /* Fondo blanco sólido */
+            background: var(--white);
             position: relative;
             z-index: 10;
         }
@@ -40,10 +44,10 @@
             font-size: 1.1rem;
         }
 
-        /* --- NUEVO: HERO SECTION (ENCABEZADO CON FOTO) --- */
+        /* HERO SECTION */
         .hero {
-            /* Altura: 75% de la pantalla */
             height: 75vh;
+            min-height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -51,21 +55,17 @@
             text-align: center;
             color: var(--white);
             position: relative;
-            /* IMPORTANTE: Aquí se define la imagen de fondo.
-               Usamos un linear-gradient negro semitransparente sobre la imagen
-               para que el texto se lea bien y darle un toque premium.
-               ¡CAMBIA LA URL POR TU FOTO PREFERIDA!
-            */
             background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://github.com/tommyalonso/alonsoweb/blob/main/img/IMG_2035%20(2).jpeg?raw=true');
-            background-size: cover;     /* Asegura que la imagen cubra todo el espacio */
-            background-position: center center; /* Centra la imagen */
-            margin-bottom: 4rem; /* Separación con el inventario */
+            background-size: cover;
+            background-position: center center;
+            margin-bottom: 4rem;
+            padding: 2rem;
         }
 
         .hero h1 {
             font-family: var(--porsche-font);
-            font-size: 3rem;
-            letter-spacing: 10px;
+            font-size: clamp(2rem, 8vw, 3rem);
+            letter-spacing: clamp(5px, 2vw, 10px);
             text-transform: uppercase;
             margin: 0;
             line-height: 1.2;
@@ -73,33 +73,35 @@
 
         .hero p {
             font-family: var(--porsche-font);
-            letter-spacing: 4px;
+            letter-spacing: clamp(2px, 1vw, 4px);
             text-transform: uppercase;
-            font-size: 0.7rem;
+            font-size: clamp(0.6rem, 2vw, 0.7rem);
             margin-top: 1.5rem;
             opacity: 0.8;
         }
-        /* -------------------------------------------------- */
-
 
         /* INVENTARIO */
         .inventory {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
-            padding: 0 5% 5rem 5%; /* Padding ajustado */
+            padding: 0 5% 5rem 5%;
         }
 
         .car-card {
             overflow: hidden;
             animation: fadeIn 0.8s ease forwards;
+            position: relative;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
         .car-image {
             width: 100%;
-            height: 450px;
+            height: 350px;
             object-fit: cover;
             filter: grayscale(100%);
             transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -110,41 +112,163 @@
             transform: scale(1.03);
         }
 
-        .car-info { padding: 1.5rem 0; border-top: 1px solid #eee; margin-top: 10px; }
+        .car-info { 
+            padding: 1.5rem 0; 
+            border-top: 1px solid #eee; 
+            margin-top: 10px; 
+        }
 
         .car-name {
             font-family: var(--porsche-font);
-            font-size: 0.85rem;
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
             letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        .car-price { font-weight: 300; color: #888; margin-top: 5px; }
+        .car-price { 
+            font-weight: 300; 
+            color: #888; 
+            margin-top: 5px;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
 
-        /* PANEL DE ADMINISTRACIÓN (FLOTANTE) */
-        #adminPanel {
-            position: fixed;
-            top: 0; right: -400px;
-            width: 350px; height: 100%;
+        /* Botón de eliminar coche */
+        .delete-car-btn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 24px;
+            line-height: 35px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 5;
+            font-weight: bold;
+        }
+
+        .admin-mode-on .delete-car-btn {
+            display: block;
+        }
+
+        /* SECCIÓN ABOUT */
+        .about-section {
+            padding: 5rem 5%;
+            background: var(--gray);
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-family: var(--porsche-font);
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        /* SECCIÓN CONTACTO */
+        .contact-section {
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            background: var(--white);
+        }
+
+        .contact-info h3 {
+            font-family: var(--porsche-font);
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            line-height: 1.8;
+            color: #555;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            color: var(--black);
+            padding: 15px 0;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-bottom-color: var(--black);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
             background: var(--black);
             color: var(--white);
-            padding: 40px;
+            border: none;
+            font-family: var(--porsche-font);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* PANEL DE ADMINISTRACIÓN */
+        #adminPanel {
+            position: fixed;
+            top: 0; 
+            right: -100%;
+            width: 90%;
+            max-width: 400px;
+            height: 100%;
+            background: var(--black);
+            color: var(--white);
+            padding: 40px 30px;
             transition: 0.5s;
             z-index: 1000;
             box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            overflow-y: auto;
         }
 
-        #adminPanel.active { right: 0; }
+        #adminPanel.active { 
+            right: 0; 
+        }
 
         .admin-title {
             font-family: var(--porsche-font);
-            font-size: 0.7rem;
+            font-size: clamp(0.6rem, 2vw, 0.7rem);
             letter-spacing: 4px;
             margin-bottom: 30px;
-            color: #555;
+            color: #888;
+            text-transform: uppercase;
         }
 
-        input {
+        #adminPanel input {
             width: 100%;
             background: transparent;
             border: none;
@@ -156,7 +280,9 @@
             outline: none;
         }
 
-        input:focus { border-bottom-color: var(--white); }
+        #adminPanel input:focus { 
+            border-bottom-color: var(--white); 
+        }
 
         .btn-add {
             width: 100%;
@@ -165,25 +291,97 @@
             color: var(--black);
             border: none;
             font-family: var(--porsche-font);
-            font-size: 0.6rem;
+            font-size: clamp(0.6rem, 2vw, 0.7rem);
             letter-spacing: 2px;
             cursor: pointer;
             margin-top: 20px;
+            text-transform: uppercase;
         }
 
         /* BOTÓN TOGGLE ADMIN */
         .admin-toggle {
             position: fixed;
-            bottom: 30px; right: 30px;
+            bottom: 20px; 
+            right: 20px;
             background: var(--black);
             color: var(--white);
-            padding: 15px 25px;
+            padding: 12px 20px;
             font-family: var(--porsche-font);
-            font-size: 0.6rem;
-            letter-spacing: 3px;
+            font-size: clamp(0.5rem, 1.5vw, 0.6rem);
+            letter-spacing: 2px;
             cursor: pointer;
             z-index: 1100;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+        }
+
+        /* MEDIA QUERIES ESPECÍFICAS */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 4%;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+            }
+
+            .hero {
+                height: 60vh;
+                margin-bottom: 2rem;
+            }
+
+            .inventory {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 4% 3rem 4%;
+            }
+
+            .car-image {
+                height: 300px;
+            }
+
+            .about-section,
+            .contact-section {
+                padding: 3rem 4%;
+            }
+
+            #adminPanel {
+                width: 100%;
+                max-width: 100%;
+                padding: 30px 20px;
+            }
+
+            .admin-toggle {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 4%;
+            }
+
+            .logo {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+            }
+
+            .hero {
+                height: 50vh;
+                min-height: 350px;
+            }
+
+            .car-image {
+                height: 250px;
+            }
+
+            .inventory {
+                gap: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -191,20 +389,19 @@
 
     <nav>
         <div class="logo">Alonso Automotive</div>
-        <div style="font-size: 0.7rem; letter-spacing: 2px; font-family: var(--porsche-font);"></div> 
     </nav>
 
     <header class="hero">
         <h1>Create Your<br>Legacy</h1>
         <p>Colección 2025-2026 // Collection 2025-2026</p>
     </header>
+
     <main class="inventory" id="carContainer">
-        </main>
-<section class="about-section">
+    </main>
+
+    <section class="about-section">
         <h2>Quiénes somos</h2>
-        <p class="about-content"> Cars & more
-  </span>
-        </p>
+        <p class="about-content">Cars & more</p>
     </section>
 
     <section class="contact-section">
@@ -218,10 +415,10 @@
             </p>
         </div>
         
-        <form class="contact-form">
-            <input type="text" placeholder="NOMBRE COMPLETO">
-            <input type="email" placeholder="EMAIL">
-            <textarea placeholder="MENSAJE" rows="4"></textarea>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Formulario enviado (simulado)');">
+            <input type="text" placeholder="NOMBRE COMPLETO" required>
+            <input type="email" placeholder="EMAIL" required>
+            <textarea placeholder="MENSAJE" rows="4" required></textarea>
             <button type="submit" class="btn-submit">Enviar Solicitud</button>
         </form>
     </section>
@@ -229,10 +426,10 @@
     <div class="admin-toggle" onclick="toggleAdmin()">+ NEW Vehicle</div>
 
     <div id="adminPanel">
-        <div class="admin-title">AÑADIR VEHÍCULO</div>
+        <div class="admin-title">Añadir Vehículo</div>
         <input type="text" id="carInputName" placeholder="MODELO (E.G. PORSCHE 911 GT3)">
         <input type="text" id="carInputPrice" placeholder="PRECIO (E.G. 215.000 €)">
-        <input type="text" id="carInputDetails" placeholder="KILOMETOS (E.G. 10.000km)">
+        <input type="text" id="carInputDetails" placeholder="KILÓMETROS (E.G. 10.000km)">
         <input type="text" id="carInputImg" placeholder="URL DE LA IMAGEN (JPG/PNG)">
         <button class="btn-add" onclick="addCar()">PUBLICAR</button>
         <button class="btn-add" style="background: transparent; color: #666; border: 1px solid #333; margin-top: 10px;" onclick="clearInventory()">RESETEAR INVENTARIO</button>
@@ -249,44 +446,40 @@
 
         function renderCars() {
             container.innerHTML = '';
-            // Usamos 'index' para saber exactamente qué coche borrar
             cars.forEach((car, index) => {
                 container.innerHTML += `
                     <div class="car-card">
                         <div class="delete-car-btn" onclick="deleteCar(${index})">×</div>
-                        <img src="${car.img}" class="car-image">
+                        <img src="${car.img}" class="car-image" alt="${car.name}">
                         <div class="car-info">
                             <div class="car-name">${car.name}</div>
                             <div class="car-price">${car.price}</div>
-                             <div class="car-price">${car.details}</div>
+                            <div class="car-price">${car.details}</div>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // NUEVA FUNCIÓN: Borrar coche individual
         function deleteCar(index) {
             const confirmacion = confirm(`¿Estás seguro de que quieres eliminar el ${cars[index].name}?`);
             if (confirmacion) {
-                cars.splice(index, 1); // Elimina 1 elemento en la posición index
-                localStorage.setItem('alonso_cars', JSON.stringify(cars)); // Actualiza memoria
-                renderCars(); // Refresca la pantalla
+                cars.splice(index, 1);
+                localStorage.setItem('alonso_cars', JSON.stringify(cars));
+                renderCars();
             }
         }
 
-        // Modificamos toggleAdmin para añadir una clase al body
         function toggleAdmin() {
             const panel = document.getElementById('adminPanel');
             panel.classList.toggle('active');
-            // Añadimos una clase al body para mostrar/ocultar las 'X' de borrar
             document.body.classList.toggle('admin-mode-on');
         }
 
         function addCar() {
             const name = document.getElementById('carInputName').value;
             const price = document.getElementById('carInputPrice').value;
-          const details = document.getElementById('carInputDetails').value;
+            const details = document.getElementById('carInputDetails').value;
             const img = document.getElementById('carInputImg').value;
 
             if(name && price && img) {
@@ -295,11 +488,10 @@
                 renderCars();
                 document.getElementById('carInputName').value = '';
                 document.getElementById('carInputPrice').value = '';
-              
- document.getElementById('carInputDetails').value = '';
+                document.getElementById('carInputDetails').value = '';
                 document.getElementById('carInputImg').value = '';
             } else {
-                alert("Rellena todos los campos.");
+                alert("Rellena todos los campos obligatorios (nombre, precio e imagen).");
             }
         }
 
@@ -312,7 +504,6 @@
         }
 
         renderCars();
-      
     </script>
 </body>
 </html>
