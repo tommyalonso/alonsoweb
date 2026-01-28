@@ -360,6 +360,7 @@
         let cars = [
             { 
                 name: "Mercedes Benz CLA AMG KIT", 
+                year: "2018",
                 price: "32.000 €", 
                 details: "34.000 KM",
                 state: "VENDIDO",
@@ -367,6 +368,7 @@
             },
             { 
                 name: "PORSCHE GT3", 
+                year: "2022",
                 price: "190.000 €", 
                 details: "14.600 KM",
                 state: "DISPONIBLE",
@@ -385,8 +387,10 @@
                         <img src="${car.img}" class="car-image" alt="${car.name}">
                         <div class="car-info">
                             <div class="car-name">${car.name}</div>
+                            <div class="car-year">${car.year}</div>
                             <div class="car-price">${car.price}</div>
                             <div class="car-details">${car.details}</div>
+                            <div class="car-state">${car.state}</div>
                         </div>
                     </div>
                 `;
