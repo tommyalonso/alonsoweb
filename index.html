@@ -361,13 +361,15 @@
             { 
                 name: "Mercedes Benz CLA AMG KIT", 
                 price: "32.000 €", 
-                details: "34.000 KM", 
+                details: "34.000 KM",
+                state: "VENDIDO",
                 img: "https://github.com/tommyalonso/alonsoweb/blob/main/img/IMG_2035%20(2).jpeg?raw=true" 
             },
             { 
                 name: "PORSCHE GT3", 
                 price: "190.000 €", 
-                details: "14.600 KM", 
+                details: "14.600 KM",
+                state: "DISPONIBLE",
                 img: "https://www.meritpartners.com/images/vehicles/269786/Black992Touring_04.jpg" 
             }
             // Añade más vehículos aquí siguiendo el mismo formato
@@ -384,7 +386,7 @@
                         <div class="car-info">
                             <div class="car-name">${car.name}</div>
                             <div class="car-price">${car.price}</div>
-                            <div class="car-price">${car.details}</div>
+                            <div class="car-details">${car.details}</div>
                         </div>
                     </div>
                 `;
